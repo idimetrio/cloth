@@ -18,7 +18,7 @@ def ec2_instances():
         instances += reservation.instances
     return instances
 
-def ip(node, use_provate=True):
+def ip(node, use_private=True):
     if node.ip_address and not use_private:
         return node.ip_address
     else:

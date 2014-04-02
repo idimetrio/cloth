@@ -18,8 +18,8 @@ def ec2_instances():
         instances += reservation.instances
     return instances
 
-def ip(node):
-    if node.ip_address:
+def ip(node, use_provate=True):
+    if node.ip_address and not use_private:
         return node.ip_address
     else:
         return node.private_ip_address
@@ -37,7 +37,7 @@ def instances(exp=".*", tag="tole"):
                 pass
     return instances
 
-def use(node):
+def use(node, use_private=True):
     "Set the fabric environment for the specifed node"
     try:
         role = node.tags.get("Name").split('-')[1]
@@ -45,4 +45,4 @@ def use(node):
     except IndexError:
         pass
     env.nodes += [node]
-    env.hosts += [ip(node)]
+    env.hosts += [ip(node, use_private)]

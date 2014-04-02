@@ -24,14 +24,14 @@ def ip(node):
     else:
         return node.private_ip_address
 
-def instances(exp=".*"):
+def instances(exp=".*", tag="tole"):
     "Filter list of machines matching an expression"
     expression = re.compile(exp)
     instances = []
     for node in ec2_instances():
         if node.tags and ip(node):
             try:
-                if expression.match(node.tags.get("role")):
+                if expression.match(node.tags.get(tag)):
                     instances.append(node)
             except TypeError:
                 pass

@@ -31,7 +31,7 @@ def instances(exp=".*"):
     for node in ec2_instances():
         if node.tags and ip(node):
             try:
-                if expression.match(node.tags.get("Name")):
+                if expression.match(node.tags.get("role")):
                     instances.append(node)
             except TypeError:
                 pass
